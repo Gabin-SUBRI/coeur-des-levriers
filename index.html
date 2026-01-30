@@ -4,450 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Association Cœurs de Lévriers</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary: #8b4513;
-        --secondary: #d2691e;
-        --accent: #ff6b6b;
-        --light-bg: #f5f1ed;
-        --dark-text: #2c1810;
-        --light-text: #6b5b4f;
-        --white: #ffffff;
-      }
-
-      body {
-        font-family: "Georgia", serif;
-        color: var(--dark-text);
-        line-height: 1.6;
-        background-color: var(--light-bg);
-      }
-
-      /* Navigation */
-      .navbar {
-        background: var(--white);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-      }
-
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-      }
-
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--primary);
-      }
-
-      .logo svg {
-        width: 40px;
-        height: 40px;
-      }
-
-      .nav-menu {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-      }
-
-      .nav-menu a {
-        text-decoration: none;
-        color: var(--dark-text);
-        font-weight: 500;
-        transition: color 0.3s;
-        font-size: 0.95rem;
-      }
-
-      .nav-menu a:hover {
-        color: var(--accent);
-      }
-
-      .nav-toggle {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-        gap: 4px;
-      }
-
-      .nav-toggle span {
-        width: 25px;
-        height: 3px;
-        background: var(--primary);
-        transition: 0.3s;
-      }
-
-      /* Hero Section */
-      .hero {
-        background:
-          linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%238B4513" width="1200" height="600"/></svg>');
-        background-size: cover;
-        background-position: center;
-        height: 70vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: var(--white);
-        position: relative;
-      }
-
-      .hero-content {
-        max-width: 800px;
-        padding: 2rem;
-      }
-
-      .hero h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      .hero p {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 1rem 2.5rem;
-        background: var(--accent);
-        color: var(--white);
-        text-decoration: none;
-        border-radius: 50px;
-        font-weight: bold;
-        transition: all 0.3s;
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-      }
-
-      .btn:hover {
-        background: #ff5252;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-      }
-
-      .btn-outline {
-        background: transparent;
-        border: 2px solid var(--white);
-        margin-left: 1rem;
-      }
-
-      .btn-outline:hover {
-        background: var(--white);
-        color: var(--primary);
-      }
-
-      /* Sections */
-      .section {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 4rem 2rem;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-      }
-
-      .section-title::after {
-        content: "";
-        display: block;
-        width: 80px;
-        height: 4px;
-        background: var(--accent);
-        margin: 1rem auto;
-        border-radius: 2px;
-      }
-
-      .section-subtitle {
-        text-align: center;
-        color: var(--light-text);
-        font-size: 1.1rem;
-        margin-bottom: 3rem;
-      }
-
-      /* Mission Statement */
-      .mission {
-        background: var(--white);
-        padding: 3rem;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        margin-bottom: 3rem;
-      }
-
-      .mission p {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: var(--light-text);
-        margin-bottom: 1rem;
-      }
-
-      .mission-author {
-        text-align: right;
-        font-style: italic;
-        color: var(--primary);
-        margin-top: 2rem;
-      }
-
-      /* Grid */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 3rem;
-      }
-
-      .card {
-        background: var(--white);
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
-      }
-
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      }
-
-      .card-image {
-        width: 100%;
-        height: 250px;
-        background: linear-gradient(135deg, var(--secondary), var(--primary));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .card-image svg {
-        width: 80px;
-        height: 80px;
-        fill: var(--white);
-      }
-
-      .card-content {
-        padding: 2rem;
-      }
-
-      .card-title {
-        font-size: 1.5rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-      }
-
-      .card-text {
-        color: var(--light-text);
-        line-height: 1.6;
-      }
-
-      /* Facebook Feed */
-      .facebook-section {
-        background: var(--white);
-        padding: 3rem;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .fb-placeholder {
-        background: #f0f2f5;
-        padding: 3rem;
-        border-radius: 10px;
-        text-align: center;
-        color: var(--light-text);
-        border: 2px dashed #ddd;
-      }
-
-      /* Donation Section */
-      .donation-section {
-        background: linear-gradient(135deg, var(--accent), #ff8e8e);
-        color: var(--white);
-        padding: 4rem 2rem;
-        text-align: center;
-        margin: 4rem 0;
-      }
-
-      .donation-content {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .donation-section h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .donation-options {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 2rem;
-        flex-wrap: wrap;
-      }
-
-      .donation-card {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
-        border-radius: 15px;
-        min-width: 250px;
-        transition: all 0.3s;
-      }
-
-      .donation-card:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(1.05);
-      }
-
-      .donation-card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .btn-white {
-        background: var(--white);
-        color: var(--accent);
-      }
-
-      .btn-white:hover {
-        background: var(--light-bg);
-        color: var(--primary);
-      }
-
-      /* Footer */
-      footer {
-        background: var(--primary);
-        color: var(--white);
-        padding: 3rem 2rem 1rem;
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 3rem;
-        margin-bottom: 2rem;
-      }
-
-      .footer-section h3 {
-        margin-bottom: 1rem;
-        font-size: 1.3rem;
-      }
-
-      .footer-section p,
-      .footer-section a {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        display: block;
-        margin-bottom: 0.5rem;
-      }
-
-      .footer-section a:hover {
-        color: var(--white);
-      }
-
-      .social-links {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .social-links a {
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s;
-      }
-
-      .social-links a:hover {
-        background: var(--accent);
-        transform: translateY(-3px);
-      }
-
-      .footer-bottom {
-        text-align: center;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .nav-menu {
-          position: fixed;
-          left: -100%;
-          top: 70px;
-          flex-direction: column;
-          background: var(--white);
-          width: 100%;
-          text-align: center;
-          transition: 0.3s;
-          box-shadow: 0 10px 27px rgba(0, 0, 0, 0.1);
-          padding: 2rem 0;
-        }
-
-        .nav-menu.active {
-          left: 0;
-        }
-
-        .nav-toggle {
-          display: flex;
-        }
-
-        .hero h1 {
-          font-size: 2rem;
-        }
-
-        .hero p {
-          font-size: 1rem;
-        }
-
-        .btn-outline {
-          margin-left: 0;
-          margin-top: 1rem;
-        }
-
-        .section-title {
-          font-size: 2rem;
-        }
-
-        .grid {
-          grid-template-columns: 1fr;
-        }
-
-        .donation-section h2 {
-          font-size: 1.8rem;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -464,9 +21,6 @@
         <ul class="nav-menu" id="navMenu">
           <li><a href="#accueil">Accueil</a></li>
           <li><a href="#association">L'Association</a></li>
-          <li><a href="#actions">Nos Actions</a></li>
-          <li><a href="#parrainages">Parrainages</a></li>
-          <li><a href="#portraits">Portraits</a></li>
           <li><a href="#soutenir">Nous Soutenir</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -529,11 +83,7 @@
       <div class="grid">
         <div class="card">
           <div class="card-image">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-              />
-            </svg>
+            <img src="/img/chien.jpg" alt="" />
           </div>
           <div class="card-content">
             <h3 class="card-title">Notre Mission</h3>
@@ -545,13 +95,7 @@
         </div>
 
         <div class="card">
-          <div class="card-image">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
-              />
-            </svg>
-          </div>
+          <div class="card-image"><img src="/img/asso.jpg" alt="" /></div>
           <div class="card-content">
             <h3 class="card-title">Nos Actions</h3>
             <p class="card-text">
@@ -563,11 +107,7 @@
 
         <div class="card">
           <div class="card-image">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-              />
-            </svg>
+            <img src="/img/london6.jpg" alt="" />
           </div>
           <div class="card-content">
             <h3 class="card-title">Sensibilisation</h3>
@@ -585,18 +125,32 @@
       <h2 class="section-title">Actualités Facebook</h2>
       <p class="section-subtitle">Suivez nos dernières nouvelles et actions</p>
       <div class="facebook-section">
-        <div class="fb-placeholder">
-          <p>📱 Intégration du flux Facebook de l'association</p>
-          <p style="margin-top: 1rem; font-size: 0.9rem">
-            Pour activer l'affichage automatique des posts :<br />
-            Utilisez le plugin Facebook Page Plugin avec votre page<br />
-            <a
-              href="https://developers.facebook.com/docs/plugins/page-plugin"
-              target="_blank"
-              style="color: var(--primary); text-decoration: underline"
-              >developers.facebook.com/docs/plugins/page-plugin</a
+        <div id="fb-root"></div>
+        <script
+          async
+          defer
+          crossorigin="anonymous"
+          src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v24.0&appId=APP_ID"
+        ></script>
+        <div
+          class="fb-page"
+          data-href="https://www.facebook.com/profile.php?id=100064422502550"
+          data-tabs="timeline"
+          data-width=""
+          data-height=""
+          data-small-header="true"
+          data-adapt-container-width="true"
+          data-hide-cover="false"
+          data-show-facepile="true"
+        >
+          <blockquote
+            cite="https://www.facebook.com/profile.php?id=100064422502550"
+            class="fb-xfbml-parse-ignore"
+          >
+            <a href="https://www.facebook.com/profile.php?id=100064422502550"
+              >Facebook</a
             >
-          </p>
+          </blockquote>
         </div>
       </div>
     </section>
@@ -627,6 +181,19 @@
             <p>Faites un don via notre RIB</p>
             <a href="#contact" class="btn btn-white" style="margin-top: 1rem"
               >Nous Contacter</a
+            >
+          </div>
+          <div class="donation-card">
+            <h3>HelloAsso</h3>
+            <p>
+              Faites un don d'une sommes de votre choix ou prennez l'adhésion à
+              12€/mois
+            </p>
+            <a
+              href="https://www.helloasso.com/associations/association-coeurs-de-levriers"
+              class="btn btn-white"
+              style="margin-top: 1rem"
+              >Rejoindre</a
             >
           </div>
         </div>
@@ -660,21 +227,33 @@
         <div class="footer-section">
           <h3>Suivez-nous</h3>
           <div class="social-links">
-            <a href="#" title="Facebook">
+            <a
+              href="https://www.facebook.com/profile.php?id=100064422502550"
+              target="_blank"
+              title="Facebook"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                 <path
                   d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
                 />
               </svg>
             </a>
-            <a href="#" title="Instagram">
+            <a
+              href="https://www.instagram.com/coeursdelevriersmarie/"
+              target="_blank"
+              title="Instagram"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                 <path
                   d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
                 />
               </svg>
             </a>
-            <a href="#" title="YouTube">
+            <a
+              href="https://www.youtube.com/@coeursdelevriers2678"
+              target="_blank"
+              title="YouTube"
+            >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                 <path
                   d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
@@ -686,39 +265,20 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 Association Cœurs de Lévriers - Tous droits réservés</p>
+        <p>&copy; 2026 Association Coeurs de Lévriers - Tous droits réservés</p>
+        <p>
+          Réalisé par
+          <a
+            href="https://gabinsubri.com"
+            target="_blank"
+            rel="noopener"
+            class="dev-credit"
+            >Gabin SUBRI</a
+          >
+        </p>
       </div>
     </footer>
 
-    <script>
-      // Mobile Menu Toggle
-      const navToggle = document.getElementById("navToggle");
-      const navMenu = document.getElementById("navMenu");
-
-      navToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-      });
-
-      // Close menu when clicking on a link
-      document.querySelectorAll(".nav-menu a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navMenu.classList.remove("active");
-        });
-      });
-
-      // Smooth scrolling
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        });
-      });
-    </script>
+    <script src="/script.js"></script>
   </body>
 </html>
